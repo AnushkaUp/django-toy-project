@@ -1,0 +1,49 @@
+{% extends "questionapp/base.html" %}
+{% block content %}
+
+<div class="card text-center">
+    <div class="card-header">
+        <img class="rounded-circle article-img" src="{{ posts.author.account.image.url }}">
+        {{ posts.author }}
+    </div>
+    <div class="card-body">
+        <p class="btn btn-primary">{{ posts.title }}</p><br><br>
+        <p class="card-text">{{ posts.content }}</p>
+    </div>
+    <div class="card-footer text-muted">
+        Posted on {{ posts.date_posted|date:"F d, Y" }}
+    </div>
+</div><br>
+
+<div class="card text-center">
+    <div class="card-header">
+        <p>Answer</p>
+    </div>
+    <div class="card-body">
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{ answer_form }}
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit"> Submit </button>
+            </div>
+        </form>
+
+    </div>
+
+</div><br>
+
+{% for answer in answers %}
+<div class="card text-center">
+    <div class="card-header">
+        <img class="rounded-circle article-img" src="{{ answer.author.account.image.url }}">
+        {{ answer.author }}
+    </div><br>
+    <div class="card-body">
+
+        <p class="card-text">{{ answer.answer }}</p>
+    </div>
+</div><br>
+{% endfor %}
+
+
+{% endblock content %}

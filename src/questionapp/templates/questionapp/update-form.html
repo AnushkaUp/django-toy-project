@@ -1,0 +1,30 @@
+{% extends "questionapp/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="card text-center">
+    <div class="card-header">
+        <img class="rounded-circle article-img" src="{{ question.author.account.image.url }}">
+        {{ question.author }}
+    </div>
+    <div class="card-body">
+        <a href="{% url 'detail-view' question.id %}" class="btn btn-info">{{ question.title }}</a><br><br>
+        <p class="card-text">{{ question.content }}</p>
+    </div>
+
+    <div class="card-footer text-muted">
+        Posted on {{ question.date_posted|date:"F d, Y" }}
+    </div>
+</div><br>
+<div class="content-section">
+    <form method="POST">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4"> Update Question </legend>
+            {{ form|crispy }}
+        </fieldset>
+        <div class="form-group">
+            <button class="btn btn-outline-info" type="submit"> Update </button>
+        </div>
+    </form>
+</div>
+{% endblock content %}

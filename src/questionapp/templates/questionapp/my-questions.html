@@ -1,0 +1,26 @@
+{% extends 'questionapp/home.html' %}
+{% block content %}
+
+
+<h1>Questions Posted by {{ username }}</h1><br>
+
+{% for q in questions %}
+<div class="card text-center">
+    <div class="card-header">
+        <img class="rounded-circle article-img" src="{{ q.author.account.image.url }}">
+        {{ q.author }}
+    </div>
+    <div class="card-body">
+        <a href="{% url 'detail-view' q.id %}" class="btn btn-info">{{ q.title }}</a><br><br>
+        <p class="card-text">{{ q.content }}</p><br>
+        <a href="{% url 'update-question' q.id %}" class="btn btn-primary">Update Question</a><br><br>
+        <a href="{% url 'delete-question' q.id %}" class="btn btn-danger">Delete Question</a><br><br>
+
+    </div>
+
+    <div class="card-footer text-muted">
+        Posted on {{ q.date_posted|date:"F d, Y" }}
+    </div>
+</div><br>
+{% endfor %}
+{% endblock content %}
